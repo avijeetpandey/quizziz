@@ -3,7 +3,9 @@ import 'package:quizziz/data/questions.dart';
 import 'package:quizziz/widgets/answer_button.dart';
 
 class QuizPage extends StatefulWidget {
-  const QuizPage({super.key});
+  const QuizPage({required this.onTapAnswer, super.key});
+
+  final void Function(String answer) onTapAnswer;
 
   @override
   State<QuizPage> createState() => _QuizPageState();
@@ -12,9 +14,13 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   var currentQuestionIndex = 0;
 
-  void answerQuestion() {
+  void answerQuestion(String answer) {
+    widget.onTapAnswer(answer);
+
     setState(() {
-      currentQuestionIndex++;
+      if (questions.length <= currentQuestionIndex) {
+        currentQuestionIndex++;
+      }
     });
   }
 
@@ -39,7 +45,11 @@ class _QuizPageState extends State<QuizPage> {
             ),
             const SizedBox(height: 30),
             ...currentQuestion.getShuffledAnswers().map((answer) {
-              return AnswerButton(answerText: answer, onTap: answerQuestion);
+              return AnswerButton(
+                  answerText: answer,
+                  onTap: () {
+                    answerQuestion(answer);
+                  });
             }),
           ],
         ),

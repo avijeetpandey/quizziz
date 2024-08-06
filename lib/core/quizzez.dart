@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:quizziz/widgets/start_screen_widget.dart';
 
 class Quizzez extends StatelessWidget {
-  const Quizzez({super.key});
+  Quizzez({required this.onTapAnswer, super.key});
+
+  void Function(String answer) onTapAnswer;
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: StartScreenWidget(),
+    return Center(
+      child: StartScreenWidget(
+        onTapAnswer: onTapAnswer,
+      ),
     );
   }
 }

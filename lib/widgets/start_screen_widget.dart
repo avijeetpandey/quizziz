@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:quizziz/core/quiz_page.dart';
 
 class StartScreenWidget extends StatelessWidget {
-  const StartScreenWidget({super.key});
+  const StartScreenWidget({required this.onTapAnswer, super.key});
+
+  final void Function(String answer) onTapAnswer;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,11 @@ class StartScreenWidget extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const QuizPage()),
+              MaterialPageRoute(
+                builder: (context) => QuizPage(
+                  onTapAnswer: onTapAnswer,
+                ),
+              ),
             );
           },
           style: OutlinedButton.styleFrom(foregroundColor: Colors.white),
