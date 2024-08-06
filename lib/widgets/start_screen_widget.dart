@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizziz/core/quiz_page.dart';
 
 class StartScreenWidget extends StatelessWidget {
   const StartScreenWidget({super.key});
@@ -27,7 +28,12 @@ class StartScreenWidget extends StatelessWidget {
           height: 30,
         ),
         OutlinedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const QuizPage()),
+            );
+          },
           style: OutlinedButton.styleFrom(foregroundColor: Colors.white),
           child: const Text("Start Quiz"),
         )
